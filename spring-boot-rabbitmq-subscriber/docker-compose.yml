@@ -1,0 +1,25 @@
+version: "3.4"
+
+services:
+
+  #spring-boot-rabbitmq
+  spring-boot-rabbitmq:
+    container_name: "spring-boot-rabbitmq"
+    image: spring-boot-rabbitmq
+    links:
+      - rabbitmq
+    ports:
+      - 8081:8081
+    environment:
+      RABBITMQ_HOST: rabbitmq
+      
+  #RabbitMQ
+  rabbitmq:
+    container_name: "techmaster_rabbitmq"
+    image: rabbitmq:3.6.14-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest

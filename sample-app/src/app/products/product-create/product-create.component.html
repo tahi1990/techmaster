@@ -1,0 +1,42 @@
+<div class="card col-md-6 mt-3 mx-auto">
+  <div class="card-body">
+      <form (ngSubmit)="create()" [formGroup]="productForm" novalidate>
+          <div class="form-group">
+              <label class="d-block">
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                  [placeholder]="'Name'"
+                />
+
+                <div *ngIf="productForm.controls.name.invalid && (productForm.controls.name.dirty || productForm.controls.name.touched)" class="text-danger">
+
+                  <div *ngIf="productForm.controls.name.errors.required">
+                    Name is required.
+                  </div>
+                  <div *ngIf="productForm.controls.name.errors.minlength">
+                    Name must be at least 3 characters long.
+                  </div>
+
+                </div>
+
+                
+              </label>
+
+              <label class="d-block">Category</label>
+              <select *ngIf="categories" class="form-control" formControlName="category">
+                <option [ngValue]="category" *ngFor="let category of categories">{{category.name}}</option>
+              </select>
+          </div>
+
+
+          <button class="btn btn-primary w-100" type="submit" [disabled]="productForm.invalid">
+            <span>Create</span>
+          </button>
+          <button class="btn btn-primary w-100" (click)="cancel()">
+            <span>Cancel</span>
+          </button>
+      </form>
+  </div>
+</div>
